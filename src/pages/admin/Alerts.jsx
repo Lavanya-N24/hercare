@@ -1,11 +1,24 @@
+import { useState } from 'react'
 import { Bell } from 'lucide-react'
-import { machines } from '../../data/machines'
+import { machines as defaultMachines } from '../../data/machines'
 import './Alerts.css'
 
-// Hardware sends automatic signals when stock is low/empty
-const lowStockMachines = machines.filter((m) => m.stock < 10)
-
 export default function Alerts() {
+  const [machinesList] = useState(() => {
+    const saved = localStorage.getItem('hercare_machines')
+    if (saved) {
+      try {
+        return JSON.parse(saved)
+      } catch (e) {
+        console.error(e)
+      }
+    }
+    return defaultMachines
+  })
+
+  // Hardware sends automatic signals when stock is low/empty (< 10 units)
+  const lowStockMachines = machinesList.filter((m) => m.stock < 10)
+
   return (
     <div className="alerts-page">
       <header>
@@ -28,7 +41,7 @@ export default function Alerts() {
               <Bell className="alert-icon" />
               <div>
                 <h3>{m.name}</h3>
-                <p>{m.location} • {m.sector}</p>
+                <p>{m.location} • {m.city} • {m.sector}</p>
                 <span className="alert-msg">
                   {m.stock === 0 ? 'Stock empty! Please restock immediately.' : `Low stock: ${m.stock} units left.`}
                 </span>

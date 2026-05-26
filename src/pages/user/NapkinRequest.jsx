@@ -156,6 +156,19 @@ export default function NapkinRequest() {
 
   const geocodeAbortRef = useRef(false)
 
+  // Load machines dynamically from localStorage
+  const [machinesList, setMachinesList] = useState(() => {
+    const saved = localStorage.getItem('hercare_machines')
+    if (saved) {
+      try {
+        return JSON.parse(saved)
+      } catch (e) {
+        console.error(e)
+      }
+    }
+    return napkinMachines
+  })
+
   // ── Country/State/City options ─────────────────────────────────────────────
   const allCountries    = useMemo(() => Country.getAllCountries(), [])
   const allStates       = useMemo(() => State.getStatesOfCountry(countryIso), [countryIso])
@@ -275,7 +288,7 @@ export default function NapkinRequest() {
           .filter((e) => e.lat && e.lng)
 
         // machines.js entries within 15 km
-        const nearbyDbMachines = napkinMachines.filter(
+        const nearbyDbMachines = machinesList.filter(
           (m) => distKm(lat, lng, m.lat, m.lng) <= 15
         )
 
@@ -355,6 +368,36 @@ export default function NapkinRequest() {
     if (!selected) return
     setDispensing(true)
     await new Promise((r) => setTimeout(r, 1500))
+    
+    // Determine the machine ID (remove db- prefix if standalone)
+    const machineId = selected.matchedMachine?.id || (selected.id.startsWith('db-') ? selected.id.replace('db-', '') : null)
+    
+    if (machineId) {
+      const saved = localStorage.getItem('hercare_machines')
+      if (saved) {
+        try {
+          const list = JSON.parse(saved)
+          const updated = list.map((m) => {
+            if (m.id === machineId) {
+              return { ...m, stock: Math.max(0, m.stock - 1) }
+            }
+            return m
+          })
+          localStorage.setItem('hercare_machines', JSON.stringify(updated))
+          setMachinesList(updated) // local state sync
+          
+          // Instantly sync the currently selected spot's stock in UI
+          if (selected.matchedMachine) {
+            selected.matchedMachine.stock = Math.max(0, selected.matchedMachine.stock - 1)
+          } else if (selected.stock != null) {
+            selected.stock = Math.max(0, selected.stock - 1)
+          }
+        } catch (e) {
+          console.error(e)
+        }
+      }
+    }
+    
     setDispensing(false)
     setSuccess(true)
   }

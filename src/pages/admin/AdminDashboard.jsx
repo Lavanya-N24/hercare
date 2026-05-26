@@ -1,22 +1,36 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Cpu, Package, History, Bell } from 'lucide-react'
-import { machines } from '../../data/machines'
+import { machines as defaultMachines } from '../../data/machines'
 import './AdminDashboard.css'
 
 export default function AdminDashboard() {
-  const totalMachines = machines.length
-  const totalStock = machines.reduce((s, m) => s + m.stock, 0)
-  const activeAlerts = machines.filter((m) => m.stock < 10).length
+  const [machinesList] = useState(() => {
+    const saved = localStorage.getItem('hercare_machines')
+    if (saved) {
+      try {
+        return JSON.parse(saved)
+      } catch (e) {
+        console.error(e)
+      }
+    }
+    return defaultMachines
+  })
+
+  const totalMachines = machinesList.length
+  const totalStock = machinesList.reduce((s, m) => s + m.stock, 0)
+  const activeAlerts = machinesList.filter((m) => m.stock < 10).length
   const dispensedToday = 42 // Simulated dispense activity for the current day
 
   // Get stock status percentages for Stock Health chart
-  const healthyCount = machines.filter(m => m.stock >= 10).length
-  const lowCount = machines.filter(m => m.stock > 0 && m.stock < 10).length
-  const emptyCount = machines.filter(m => m.stock === 0).length
+  const healthyCount = machinesList.filter(m => m.stock >= 10).length
+  const lowCount = machinesList.filter(m => m.stock > 0 && m.stock < 10).length
+  const emptyCount = machinesList.filter(m => m.stock === 0).length
   
-  const healthyPct = Math.round((healthyCount / totalMachines) * 100)
-  const lowPct = Math.round((lowCount / totalMachines) * 100)
-  const emptyPct = Math.round((emptyCount / totalMachines) * 100)
+  // Guard against divide-by-zero if there are no machines
+  const healthyPct = totalMachines > 0 ? Math.round((healthyCount / totalMachines) * 100) : 0
+  const lowPct = totalMachines > 0 ? Math.round((lowCount / totalMachines) * 100) : 0
+  const emptyPct = totalMachines > 0 ? Math.round((emptyCount / totalMachines) * 100) : 0
 
   return (
     <div className="admin-dashboard">
