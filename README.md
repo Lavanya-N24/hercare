@@ -4,14 +4,6 @@
 
 ---
 
-## 📱 Screenshots
-
-| Dashboard | AI Assistant | Doctor Recommendations |
-|-----------|-------------|----------------------|
-| Mood tracker, quick actions, wellness tips | Groq-powered multilingual AI | 22 doctors, booking modal |
-
----
-
 ## ✨ Features
 
 ### 👤 User App
