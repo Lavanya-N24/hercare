@@ -1,0 +1,58 @@
+.alerts-page { max-width: 700px; }
+
+.alerts-page header {
+  margin-bottom: 1.5rem;
+}
+
+.alerts-page h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.alerts-page header p { color: var(--text-muted); }
+
+.no-alerts {
+  background: var(--bg-card);
+  padding: 3rem;
+  border-radius: var(--radius);
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.no-alerts svg {
+  opacity: 0.5;
+  margin-bottom: 1rem;
+}
+
+.alert-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+  box-shadow: var(--shadow);
+}
+
+.alert-card.warning {
+  background: #fff8e1;
+  border-left: 4px solid var(--warning);
+}
+
+.alert-card.critical {
+  background: #ffebee;
+  border-left: 4px solid var(--danger);
+}
+
+.alert-icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.alert-card.warning .alert-icon { color: #e65100; }
+.alert-card.critical .alert-icon { color: #c62828; }
+
+.alert-card h3 { font-size: 1rem; margin-bottom: 0.25rem; }
+.alert-card p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+
+.alert-msg {
+  font-weight: 500;
+  color: var(--text);
+}

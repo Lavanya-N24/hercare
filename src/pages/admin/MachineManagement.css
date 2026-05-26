@@ -1,0 +1,43 @@
+.machine-management { max-width: 900px; }
+
+.machine-management header {
+  margin-bottom: 1.5rem;
+}
+
+.machine-management h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.machine-management header p { color: var(--text-muted); }
+
+.machine-table-wrap {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.machine-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.machine-table th,
+.machine-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.machine-table th {
+  background: var(--border);
+  font-weight: 600;
+}
+
+.machine-table tr.low-stock { background: #fff8e1; }
+
+.status-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+.status-badge.ok { background: #e8f5e9; color: #2e7d32; }
+.status-badge.low { background: #fff3e0; color: #e65100; }
+.status-badge.empty { background: #ffebee; color: #c62828; }

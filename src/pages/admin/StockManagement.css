@@ -1,0 +1,74 @@
+.stock-management { max-width: 700px; }
+
+.stock-management header {
+  margin-bottom: 1.5rem;
+}
+
+.stock-management h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.stock-management header p { color: var(--text-muted); }
+
+.stock-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.summary-card {
+  background: var(--bg-card);
+  padding: 1.25rem;
+  border-radius: var(--radius);
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.summary-card.warning { background: #fff8e1; }
+.summary-card.danger { background: #ffebee; }
+
+.summary-value {
+  display: block;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.summary-card.warning .summary-value { color: #e65100; }
+.summary-card.danger .summary-value { color: #c62828; }
+
+.summary-label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.stock-list h2 { font-size: 1.1rem; margin-bottom: 1rem; }
+
+.stock-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  margin-bottom: 0.5rem;
+  box-shadow: var(--shadow);
+}
+
+.stock-item.low { border-left: 4px solid var(--warning); }
+
+.stock-item strong { display: block; margin-bottom: 0.25rem; }
+.stock-item p { font-size: 0.9rem; color: var(--text-muted); }
+
+.stock-count {
+  margin-left: auto;
+  font-weight: 600;
+}
+
+.restock-btn {
+  padding: 0.5rem 1rem;
+  background: var(--secondary);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+}
+.restock-btn:hover { background: #6a3fdb; }

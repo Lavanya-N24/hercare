@@ -1,0 +1,455 @@
+/* ============================================================
+   UserDashboard — Women's Wellness Dashboard
+   ============================================================ */
+
+.user-dashboard {
+  max-width: 860px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+/* ── Shared card base ────────────────────────────────────── */
+.db-card {
+  background: var(--bg-card);
+  border-radius: 22px;
+  padding: 1.5rem;
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow);
+}
+.card-heading {
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.heading-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+  margin-left: 2px;
+  animation: pulse-dot 1.8s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(1);   opacity: 1; }
+  50%       { transform: scale(1.5); opacity: 0.6; }
+}
+
+.section-heading {
+  font-size: 1.1rem;
+  margin-bottom: 0.9rem;
+  color: var(--text);
+}
+
+/* ── HERO ────────────────────────────────────────────────── */
+.db-hero {
+  position: relative;
+  background: linear-gradient(135deg, #e91e63 0%, #9c27b0 45%, #5e35b1 100%);
+  border-radius: 24px;
+  padding: 2.25rem 2rem;
+  overflow: hidden;
+  color: white;
+  min-height: 210px;
+  display: flex;
+  align-items: center;
+  animation: fadeUp 0.55s ease both;
+}
+
+/* Shimmer sweep */
+.db-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.07) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3.5s linear infinite;
+  pointer-events: none;
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Floating orbs */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+.orb-1 { width: 170px; height: 170px; top: -70px;  right: 110px; animation: float 7s ease-in-out infinite; }
+.orb-2 { width: 95px;  height: 95px;  bottom: -30px; right: 50px;  animation: float 5s ease-in-out 1s infinite; }
+.orb-3 { width: 55px;  height: 55px;  top: 18px;   right: 30px;  animation: float 6s ease-in-out 2s infinite; background: rgba(255,255,255,0.18); }
+.orb-4 { width: 130px; height: 130px; bottom: -50px; left: 55%;   animation: float 8s ease-in-out 0.5s infinite; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+/* Hero content */
+.hero-body {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  padding: 4px 14px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin-bottom: 0.9rem;
+}
+.hero-greeting {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 0.45rem;
+  font-family: 'Fraunces', Georgia, serif;
+}
+.hero-name {
+  background: linear-gradient(90deg, #fff 0%, #fce4ec 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-size: 0.9rem;
+  opacity: 0.88;
+  margin-bottom: 1.2rem;
+}
+.hero-pills {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+.pill {
+  padding: 0.45rem 1.15rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.18s, box-shadow 0.18s;
+}
+.pill:hover { transform: translateY(-2px); }
+.pill-solid {
+  background: white;
+  color: #e91e63;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+}
+.pill-solid:hover { box-shadow: 0 6px 22px rgba(0, 0, 0, 0.25); }
+.pill-ghost {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(8px);
+}
+.pill-ghost:hover { background: rgba(255, 255, 255, 0.25); }
+
+/* Flower decoration */
+.hero-flower {
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 6rem;
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.2));
+  animation: float 4.5s ease-in-out infinite;
+  z-index: 1;
+  user-select: none;
+}
+
+/* ── MOOD CHECK-IN ───────────────────────────────────────── */
+.db-mood {
+  animation: fadeUp 0.5s ease 0.08s both;
+}
+.mood-row {
+  display: flex;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+.mood-btn {
+  flex: 1;
+  min-width: 58px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 0.8rem 0.3rem;
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  background: var(--bg);
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.mood-btn:hover {
+  border-color: var(--primary-light);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(233, 30, 99, 0.12);
+}
+.mood-on {
+  border-color: var(--primary) !important;
+  background: linear-gradient(135deg, var(--primary-light), #f3e5f5) !important;
+  transform: translateY(-4px) scale(1.06) !important;
+  box-shadow: 0 8px 22px rgba(233, 30, 99, 0.22) !important;
+}
+.mood-emoji {
+  font-size: 1.75rem;
+  line-height: 1;
+  transition: transform 0.2s;
+}
+.mood-btn:hover .mood-emoji,
+.mood-on .mood-emoji {
+  transform: scale(1.2);
+}
+.mood-label {
+  font-size: 0.64rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+.mood-msg {
+  margin-top: 0.85rem;
+  padding: 0.65rem 1rem;
+  background: linear-gradient(135deg, #fce4ec, #f3e5f5);
+  border-radius: 12px;
+  font-size: 0.88rem;
+  color: var(--primary-dark);
+  font-weight: 500;
+  animation: fadeUp 0.3s ease both;
+  border-left: 3px solid var(--primary);
+}
+
+/* ── QUICK ACTIONS ───────────────────────────────────────── */
+.db-actions {
+  animation: fadeUp 0.5s ease 0.12s both;
+}
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+  gap: 0.7rem;
+}
+.action-card {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.95rem 1rem;
+  background: var(--bg-card);
+  border-radius: 16px;
+  text-decoration: none;
+  color: inherit;
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: fadeUp 0.5s ease calc(0.1s + var(--i) * 0.055s) both;
+  position: relative;
+  overflow: hidden;
+}
+.action-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(233,30,99,0.03), transparent);
+  opacity: 0;
+  transition: opacity 0.22s;
+}
+.action-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 14px 36px rgba(233, 30, 99, 0.16);
+  border-color: #f8bbd9;
+}
+.action-card:hover::before { opacity: 1; }
+
+.action-icon-box {
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+  transition: transform 0.22s;
+}
+.action-card:hover .action-icon-box {
+  transform: rotate(-6deg) scale(1.1);
+}
+
+.action-text { flex: 1; min-width: 0; }
+.action-text h3 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 0.12rem;
+  font-family: 'DM Sans', sans-serif;
+}
+.action-text p {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.action-chev {
+  font-size: 1.3rem;
+  color: var(--text-muted);
+  transition: transform 0.2s, color 0.2s;
+  line-height: 1;
+}
+.action-card:hover .action-chev {
+  transform: translateX(4px);
+  color: var(--primary);
+}
+
+/* ── WELLNESS TIP ────────────────────────────────────────── */
+.db-tip-wrap {
+  background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 100%);
+  border-radius: 22px;
+  padding: 1.5rem;
+  border: 1.5px solid #f8bbd9;
+  animation: fadeUp 0.5s ease 0.18s both;
+}
+.tip-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--primary-dark);
+  margin-bottom: 0.9rem;
+  background: rgba(233, 30, 99, 0.1);
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+.tip-body {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  min-height: 58px;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.tip-in  { opacity: 1; transform: translateY(0); }
+.tip-out { opacity: 0; transform: translateY(8px); }
+
+.tip-icon {
+  font-size: 2rem;
+  line-height: 1;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.12));
+}
+.tip-body p {
+  font-size: 0.94rem;
+  color: var(--primary-dark);
+  line-height: 1.65;
+  font-weight: 500;
+}
+.tip-dots {
+  display: flex;
+  gap: 5px;
+  margin-top: 1.1rem;
+}
+.tip-dot {
+  height: 6px;
+  width: 6px;
+  border-radius: 999px;
+  background: rgba(233, 30, 99, 0.22);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+.dot-on {
+  width: 22px;
+  background: var(--primary);
+}
+
+/* ── QUOTE ───────────────────────────────────────────────── */
+.db-quote {
+  background: var(--bg-card);
+  border-radius: 22px;
+  padding: 2rem;
+  text-align: center;
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+  animation: fadeUp 0.5s ease 0.22s both;
+}
+.db-quote::before {
+  content: '\201C';
+  position: absolute;
+  font-size: 11rem;
+  font-family: Georgia, serif;
+  color: var(--primary-light);
+  top: -3rem;
+  left: 0.5rem;
+  line-height: 1;
+  opacity: 0.45;
+  user-select: none;
+}
+.quote-petal {
+  font-size: 2.2rem;
+  margin-bottom: 0.6rem;
+  animation: float 4.5s ease-in-out infinite;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.12));
+}
+.quote-text {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text);
+  font-style: italic;
+  position: relative;
+  z-index: 1;
+}
+.quote-src {
+  margin-top: 0.8rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+/* ── Animations ──────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .db-hero {
+    padding: 1.6rem 1.25rem;
+    min-height: auto;
+  }
+  .hero-greeting { font-size: 1.55rem; }
+  .hero-flower   { font-size: 4rem; right: 1rem; }
+  .action-grid   { grid-template-columns: 1fr 1fr; }
+  .orb-1, .orb-4 { display: none; }
+}
+
+@media (max-width: 420px) {
+  .hero-flower { display: none; }
+  .action-grid { grid-template-columns: 1fr; }
+  .mood-row    { gap: 0.35rem; }
+  .mood-btn    { padding: 0.65rem 0.2rem; }
+}

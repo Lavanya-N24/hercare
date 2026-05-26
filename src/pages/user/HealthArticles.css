@@ -1,0 +1,575 @@
+/* ============================================================
+   HealthArticles — Clean editorial / article layout
+   ============================================================ */
+
+.ha-wrap {
+  max-width: 740px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+/* ── Page Header ──────────────────────────────────────────── */
+.ha-header {
+  padding-bottom: 1.25rem;
+  border-bottom: 2px solid var(--text);
+}
+
+.ha-title {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 0.3rem;
+}
+
+.ha-sub {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ── Search ───────────────────────────────────────────────── */
+.ha-search-wrap {
+  position: relative;
+}
+
+.ha-search-icon {
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.ha-search {
+  width: 100%;
+  padding: 0.65rem 1rem 0.65rem 2.4rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-card);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.875rem;
+  color: var(--text);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.ha-search:focus {
+  outline: none;
+  border-color: var(--text);
+  box-shadow: 0 0 0 3px rgba(45, 42, 43, 0.07);
+}
+
+.ha-search::placeholder { color: #c0bcbe; }
+
+/* ── Category Filters ─────────────────────────────────────── */
+.ha-filters {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.ha-filter-btn {
+  padding: 0.3rem 0.85rem;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  background: transparent;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.13s;
+  letter-spacing: 0.01em;
+}
+
+.ha-filter-btn:hover {
+  border-color: var(--text);
+  color: var(--text);
+}
+
+.ha-filter-active {
+  background: var(--text) !important;
+  color: #fff !important;
+  border-color: var(--text) !important;
+}
+
+/* ── Section Label ────────────────────────────────────────── */
+.ha-section-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.ha-section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── Inline Meta ──────────────────────────────────────────── */
+.ha-category-tag {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.ha-read-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.ha-source-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.ha-dot {
+  color: var(--border);
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+/* ── Featured Grid ────────────────────────────────────────── */
+.ha-featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 1px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--border);
+}
+
+.ha-featured-card {
+  background: var(--bg-card);
+  padding: 1.35rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  transition: background 0.14s;
+}
+
+.ha-featured-card:hover { background: #fdfcfc; }
+
+.ha-featured-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ha-featured-title {
+  font-size: 0.96rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+.ha-featured-desc {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  flex: 1;
+}
+
+.ha-featured-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.65rem;
+  border-top: 1px solid var(--border);
+  margin-top: 0.25rem;
+}
+
+.ha-read-cta {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--art-color);
+  white-space: nowrap;
+}
+
+/* ── Article List ─────────────────────────────────────────── */
+.ha-list {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.ha-article-card {
+  background: var(--bg-card);
+  transition: background 0.13s;
+}
+
+.ha-article-card:hover,
+.ha-article-open { background: #fdfcfc !important; }
+
+.ha-article-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1.1rem 1.2rem;
+  cursor: pointer;
+  gap: 0.75rem;
+}
+
+.ha-article-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.ha-art-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.3rem;
+  flex-wrap: wrap;
+}
+
+.ha-article-title {
+  font-size: 0.94rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.2rem;
+}
+
+.ha-article-desc {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.ha-chevron {
+  color: var(--text-muted);
+  flex-shrink: 0;
+  opacity: 0.4;
+  margin-top: 3px;
+  transition: transform 0.2s ease, opacity 0.2s;
+}
+
+.ha-chevron-open {
+  transform: rotate(180deg);
+  opacity: 1;
+  color: var(--art-color);
+}
+
+/* ── Expanded Article Body ────────────────────────────────── */
+.ha-article-body {
+  padding: 0 1.2rem 1.2rem;
+  border-top: 1px solid var(--border);
+  animation: haFadeIn 0.17s ease;
+}
+
+@keyframes haFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Article Prose ────────────────────────────────────────── */
+.ha-art-intro {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.8;
+  margin: 1rem 0 1.1rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--art-color);
+}
+
+.ha-art-section {
+  margin-bottom: 1.1rem;
+}
+
+.ha-art-section-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--art-color);
+  margin-bottom: 0.3rem;
+}
+
+.ha-art-section-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.875rem;
+  color: var(--text);
+  line-height: 1.75;
+}
+
+/* ── Action Row ───────────────────────────────────────────── */
+.ha-art-actions {
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--border);
+  margin-top: 0.4rem;
+}
+
+.ha-read-full-btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.38rem 0.9rem;
+  cursor: pointer;
+  transition: all 0.13s;
+}
+
+.ha-read-full-btn:hover {
+  background: var(--text);
+  color: #fff;
+  border-color: var(--text);
+}
+
+/* ── Empty State ──────────────────────────────────────────── */
+.ha-empty {
+  text-align: center;
+  padding: 3.5rem 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-card);
+}
+
+.ha-empty-icon {
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+  display: block;
+  font-family: 'Fraunces', Georgia, serif;
+}
+
+.ha-empty h3 {
+  font-size: 0.97rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.ha-empty p {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* ══════════════════════════════════════════════════════════
+   FULL ARTICLE MODAL
+   ══════════════════════════════════════════════════════════ */
+
+.ha-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 18, 19, 0.6);
+  z-index: 2000;
+  backdrop-filter: blur(5px);
+}
+
+.ha-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2001;
+  width: min(620px, calc(100vw - 32px));
+  max-height: 86vh;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,0.07),
+    0 24px 64px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: haModalIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes haModalIn {
+  from { opacity: 0; transform: translate(-50%, -48%) scale(0.97); }
+  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Modal Header */
+.ha-modal-header {
+  padding: 1.5rem 1.5rem 1.15rem;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.ha-modal-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.ha-modal-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.ha-modal-close {
+  width: 28px;
+  height: 28px;
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.13s;
+}
+
+.ha-modal-close:hover {
+  background: var(--text);
+  color: #fff;
+  border-color: var(--text);
+}
+
+.ha-modal-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.4rem;
+}
+
+.ha-modal-desc {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* Modal Body — article prose */
+.ha-modal-body {
+  overflow-y: auto;
+  padding: 1.4rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.ha-modal-body::-webkit-scrollbar { width: 3px; }
+.ha-modal-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* Modal Footer */
+.ha-modal-footer {
+  padding: 0.85rem 1.5rem;
+  border-top: 1px solid var(--border);
+  background: #fafafa;
+  display: flex;
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+
+.ha-footer-note {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.ha-footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ha-modal-close-btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.4rem 0.85rem;
+  cursor: pointer;
+  transition: all 0.13s;
+}
+
+.ha-modal-close-btn:hover {
+  border-color: var(--text-muted);
+  color: var(--text);
+}
+
+.ha-external-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--text);
+  border: 1px solid var(--text);
+  border-radius: 4px;
+  padding: 0.4rem 0.9rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.13s;
+}
+
+.ha-external-btn:hover { opacity: 0.8; }
+
+.ha-browse-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--sec-color, var(--text-muted));
+  text-decoration: none;
+  margin-top: 0.85rem;
+  transition: opacity 0.15s;
+}
+
+.ha-browse-link:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 560px) {
+  .ha-featured-grid { grid-template-columns: 1fr; }
+  .ha-article-desc { display: none; }
+  .ha-modal-header,
+  .ha-modal-body,
+  .ha-modal-footer { padding-left: 1.1rem; padding-right: 1.1rem; }
+  .ha-modal-footer { flex-direction: column; align-items: flex-start; }
+}

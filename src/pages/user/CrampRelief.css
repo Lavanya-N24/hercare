@@ -1,0 +1,268 @@
+/* ============================================================
+   CrampRelief — Clickable expandable info cards
+   ============================================================ */
+
+.cr-wrap {
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+.cr-title {
+  font-size: 1.55rem;
+  font-weight: 800;
+  margin-bottom: 0.25rem;
+  color: var(--text);
+}
+.cr-sub {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ── Alert Banner ─────────────────────────────────────────── */
+.cr-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: #fff8e1;
+  border-left: 4px solid #f59e0b;
+  border-radius: 12px;
+  font-size: 0.88rem;
+  color: #78350f;
+  line-height: 1.6;
+}
+.cr-alert-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+
+/* ── Cards Container ──────────────────────────────────────── */
+.cr-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+/* ── Single Card ──────────────────────────────────────────── */
+.cr-card {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+  user-select: none;
+}
+
+.cr-card:hover {
+  border-color: var(--card-color);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+  transform: translateY(-1px);
+}
+
+.cr-card-open {
+  border-color: var(--card-color) !important;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.1) !important;
+}
+
+/* ── Card Header (always visible) ─────────────────────────── */
+.cr-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.1rem;
+  gap: 0.75rem;
+}
+
+.cr-card-left {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Colored icon circle */
+.cr-icon-wrap {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--card-bg);
+  color: var(--card-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+.cr-card:hover .cr-icon-wrap { transform: scale(1.08); }
+.cr-card-open .cr-icon-wrap {
+  background: var(--card-color);
+  color: #fff;
+}
+
+.cr-card-title {
+  font-size: 0.97rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.cr-card-short {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* Chevron */
+.cr-chevron {
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.cr-chevron-open {
+  transform: rotate(180deg);
+  color: var(--card-color);
+}
+
+/* ── Expandable Body ──────────────────────────────────────── */
+.cr-card-body {
+  padding: 0 1.1rem 1.1rem;
+  border-top: 1px solid var(--border);
+  animation: slideDown 0.22s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.cr-details-list {
+  list-style: none;
+  margin: 0.85rem 0 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.cr-detail-item {
+  font-size: 0.875rem;
+  color: var(--text);
+  line-height: 1.55;
+  padding: 0.55rem 0.8rem;
+  background: var(--card-bg);
+  border-radius: 9px;
+  border-left: 3px solid var(--card-color);
+}
+
+/* Actions row (Learn More + YouTube) */
+.cr-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+/* Learn More button (in-app) */
+.cr-learn-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--card-color);
+  background: var(--card-bg);
+  border: 1.5px solid var(--card-color);
+  border-radius: 8px;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.cr-learn-more:hover {
+  background: var(--card-color);
+  color: #fff;
+}
+
+/* YouTube button — card */
+.cr-yt-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #fff;
+  background: #ff0000;
+  border: none;
+  border-radius: 8px;
+  padding: 0.4rem 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s;
+  box-shadow: 0 3px 10px rgba(255,0,0,0.25);
+}
+.cr-yt-btn:hover {
+  background: #cc0000;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(255,0,0,0.35);
+}
+
+/* YouTube button — inside modal footer */
+.cr-modal-yt-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  background: #ff0000;
+  border: none;
+  border-radius: 9px;
+  padding: 0.52rem 1.2rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s;
+  box-shadow: 0 3px 10px rgba(255,0,0,0.25);
+}
+.cr-modal-yt-btn:hover {
+  background: #cc0000;
+  transform: translateY(-1px);
+}
+
+/* ── Doctor CTA ───────────────────────────────────────────── */
+.cr-doctor-cta {
+  background: linear-gradient(135deg, #fce4ec, #f3e5f5);
+  border-radius: 16px;
+  padding: 1.4rem;
+  text-align: center;
+  border: 1.5px solid #f8bbd9;
+}
+.cr-doctor-cta p {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.8rem;
+}
+.cr-cta-btn {
+  display: inline-block;
+  background: var(--primary);
+  color: #fff;
+  text-decoration: none;
+  padding: 0.6rem 1.4rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: all 0.18s;
+  box-shadow: 0 4px 14px rgba(233,30,99,0.25);
+}
+.cr-cta-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(233,30,99,0.3);
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .cr-card-short { display: none; }
+  .cr-card-header { padding: 0.85rem 0.9rem; }
+  .cr-card-body { padding: 0 0.9rem 0.9rem; }
+}

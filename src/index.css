@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap');
+
+:root {
+  --primary: #e91e63;
+  --primary-dark: #c2185b;
+  --primary-light: #f8bbd9;
+  --secondary: #7c4dff;
+  --accent: #00bfa5;
+  --bg: #faf8f9;
+  --bg-card: #ffffff;
+  --text: #2d2a2b;
+  --text-muted: #6b6568;
+  --border: #ebe8e9;
+  --danger: #f44336;
+  --warning: #ff9800;
+  --success: #4caf50;
+  --shadow: 0 2px 12px rgba(233, 30, 99, 0.08);
+  --shadow-lg: 0 8px 32px rgba(233, 30, 99, 0.12);
+  --radius: 12px;
+  --radius-lg: 20px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Fraunces', Georgia, serif;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
