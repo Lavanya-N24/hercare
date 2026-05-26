@@ -60,9 +60,6 @@ export default function Landing() {
               <span>Get Started as User</span>
               <ArrowRight className="btn-icon" />
             </Link>
-            <Link to="/admin/login" className="btn btn-secondary">
-              <span>Admin Portal</span>
-            </Link>
           </div>
 
           <div className="vending-hero-container">
