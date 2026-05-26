@@ -1,7 +1,7 @@
 .admin-dashboard {
   flex: 1;
   padding: 2rem;
-  background-color: var(--background);
+  background-color: var(--bg);
   overflow-y: auto;
 }
 
@@ -233,7 +233,7 @@ header p {
 .card-icon {
   width: 40px;
   height: 40px;
-  background: var(--bg-secondary);
+  background: rgba(233, 30, 99, 0.05);
   color: var(--primary);
   padding: 8px;
   border-radius: 8px;

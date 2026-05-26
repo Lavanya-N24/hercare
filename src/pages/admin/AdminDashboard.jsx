@@ -1,13 +1,28 @@
 import { Link } from 'react-router-dom'
 import { Cpu, Package, History, Bell } from 'lucide-react'
+import { machines } from '../../data/machines'
 import './AdminDashboard.css'
 
 export default function AdminDashboard() {
+  const totalMachines = machines.length
+  const totalStock = machines.reduce((s, m) => s + m.stock, 0)
+  const activeAlerts = machines.filter((m) => m.stock < 10).length
+  const dispensedToday = 42 // Simulated dispense activity for the current day
+
+  // Get stock status percentages for Stock Health chart
+  const healthyCount = machines.filter(m => m.stock >= 10).length
+  const lowCount = machines.filter(m => m.stock > 0 && m.stock < 10).length
+  const emptyCount = machines.filter(m => m.stock === 0).length
+  
+  const healthyPct = Math.round((healthyCount / totalMachines) * 100)
+  const lowPct = Math.round((lowCount / totalMachines) * 100)
+  const emptyPct = Math.round((emptyCount / totalMachines) * 100)
+
   return (
     <div className="admin-dashboard">
       <header>
         <h1>Admin Dashboard</h1>
-        <p>Overview of vending machine network and inventory</p>
+        <p>Overview of vending machine network and inventory health</p>
       </header>
 
       {/* Quick Stats */}
@@ -18,34 +33,34 @@ export default function AdminDashboard() {
           </div>
           <div className="stat-info">
             <h3>Total Machines</h3>
-            <p className="stat-value">8</p>
+            <p className="stat-value">{totalMachines}</p>
           </div>
         </div>
         <div className="stat-card">
-          <div className="stat-icon-wrapper">
+          <div className="stat-icon-wrapper" style={{ background: 'rgba(0, 191, 165, 0.1)', color: 'var(--accent)' }}>
             <Package size={24} />
           </div>
           <div className="stat-info">
             <h3>Total Stock</h3>
-            <p className="stat-value">100</p>
+            <p className="stat-value">{totalStock}</p>
           </div>
         </div>
         <div className="stat-card">
-          <div className="stat-icon-wrapper">
+          <div className="stat-icon-wrapper" style={{ background: 'rgba(124, 77, 255, 0.1)', color: 'var(--secondary)' }}>
             <History size={24} />
           </div>
           <div className="stat-info">
             <h3>Dispensed Today</h3>
-            <p className="stat-value">40</p>
+            <p className="stat-value">{dispensedToday}</p>
           </div>
         </div>
         <div className="stat-card">
           <div className="stat-icon-wrapper" style={{ background: '#fee2e2', color: '#ef4444' }}>
-            <Bell size={10} />
+            <Bell size={24} />
           </div>
           <div className="stat-info">
             <h3>Active Alerts</h3>
-            <p className="stat-value" style={{ color: '#ef4444' }}>3</p>
+            <p className="stat-value" style={{ color: '#ef4444' }}>{activeAlerts}</p>
           </div>
         </div>
       </div>
@@ -72,27 +87,36 @@ export default function AdminDashboard() {
             <h3>Stock Health</h3>
           </div>
           <div className="pie-chart-container">
-            <div className="pie-chart"></div>
+            <div 
+              className="pie-chart" 
+              style={{ 
+                background: `conic-gradient(var(--primary) 0% ${healthyPct}%, #ff9800 ${healthyPct}% ${healthyPct + lowPct}%, #ef4444 ${healthyPct + lowPct}% 100%)` 
+              }}
+            ></div>
             <div className="pie-hole">
-              <span className="pie-total">100%</span>
-              <span className="pie-label">Status</span>
+              <span className="pie-total">{healthyPct}%</span>
+              <span className="pie-label">Healthy</span>
             </div>
             <div className="pie-legend">
               <div className="legend-item">
                 <div className="dot" style={{ background: 'var(--primary)' }}></div>
-                <span>Healthy</span>
+                <span>Healthy ({healthyCount})</span>
+              </div>
+              <div className="legend-item">
+                <div className="dot" style={{ background: '#ff9800' }}></div>
+                <span>Low ({lowCount})</span>
               </div>
               <div className="legend-item">
                 <div className="dot" style={{ background: '#ef4444' }}></div>
-                <span>Low</span>
+                <span>Empty ({emptyCount})</span>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <header style={{ marginBottom: '1.5rem', marginTop: '1rem' }}>
-        <h2 style={{ fontSize: '1.5rem', color: 'var(--text)' }}>Quick Actions</h2>
+      <header style={{ marginBottom: '1.5rem', marginTop: '1.5rem' }}>
+        <h2 style={{ fontSize: '1.4rem', color: 'var(--text)', fontFamily: "'Fraunces', Georgia, serif" }}>Quick Actions</h2>
       </header>
 
       <div className="admin-cards">
@@ -114,7 +138,7 @@ export default function AdminDashboard() {
         <Link to="/admin/alerts" className="admin-card alerts-card">
           <Bell className="card-icon" />
           <h3>System Alerts</h3>
-          <p>3 machines require attention</p>
+          <p>{activeAlerts > 0 ? `${activeAlerts} machines require attention` : 'All systems operating normally'}</p>
         </Link>
       </div>
     </div>
